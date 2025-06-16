@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of="bookId")
 public class Book {
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.UUID)
     @Column(name="id")
     private String bookId;
 
@@ -40,11 +40,11 @@ public class Book {
     private String nacionality;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="category")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="author")
     private Author author;
 
     public String getName() {
