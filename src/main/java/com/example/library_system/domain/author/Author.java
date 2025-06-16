@@ -27,6 +27,7 @@ public class Author {
 
     private String surname;
 
+    @Column(name="date_of_birth")
     private Date dateOfBirth;
 
     private String biography;
