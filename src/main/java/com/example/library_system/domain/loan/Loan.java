@@ -1,12 +1,19 @@
 package com.example.library_system.domain.loan;
 
-import com.example.library_system.domain.book.Book;
+import java.util.List;
+
+import com.example.library_system.domain.loanbook.LoanBook;
 import com.example.library_system.domain.reader.Reader;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,11 +27,15 @@ import lombok.NoArgsConstructor;
 public class Loan {
 
     @Id @GeneratedValue(strategy=GenerationType.UUID)
+    @Column(name="id")
     private String loanId;
 
+    @ManyToOne
+    @JoinColumn(name="reader")
     private Reader reader;
 
-    private Book book;
+    @OneToMany(mappedBy="loan", cascade=CascadeType.REMOVE, orphanRemoval=true)
+    private List<LoanBook> loanBook;
 
     public Reader getReader() {
         return this.reader;
@@ -34,17 +45,17 @@ public class Loan {
         this.reader = reader;
     }
 
-    public Book getBook() {
-        return this.book;
+    public List<LoanBook> getLoanBook() {
+        return this.loanBook;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setLoanBook(List<LoanBook> loanBook) {
+        this.loanBook = loanBook;
     }
 
     public Loan(RequestLoan requestLoan) {
         this.reader = requestLoan.reader();
-        this.book = requestLoan.book();
+        this.loanBook = requestLoan.loanBook();
     }
 
 }
