@@ -2,6 +2,9 @@ package com.example.library_system.domain.book;
 
 import java.util.Date;
 
+import com.example.library_system.domain.author.Author;
+import com.example.library_system.domain.category.Category;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,11 +41,11 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name="id")
-    private int category;
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name="id")
-    private String author;
+    private Author author;
 
     public String getName() {
         return this.name;
@@ -84,19 +87,19 @@ public class Book {
         this.nacionality = nacionality;
     }
 
-    public int getCategory() {
+    public Category getCategory() {
         return this.category;
     }
 
-    public void setCategory(int category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return this.author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
