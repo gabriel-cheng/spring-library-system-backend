@@ -1,5 +1,6 @@
 package com.example.library_system.domain.category;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of="categoryId")
 public class Category {
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.UUID)
     @Column(name="id")
     private String categoryId;
 
