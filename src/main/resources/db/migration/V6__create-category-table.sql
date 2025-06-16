@@ -1,0 +1,5 @@
+CREATE TABLE category(
+    id TEXT UNIQUE NOT NULL,
+    name TEXT UNIQUE NOT NULL,
+    code INT UNIQUE NOT NULL
+);
