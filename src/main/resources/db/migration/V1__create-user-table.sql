@@ -1,0 +1,8 @@
+CREATE TABLE reader(
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    firstname TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    cpf TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    cel TEXT NOT NULL UNIQUE
+);
