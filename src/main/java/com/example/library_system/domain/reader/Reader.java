@@ -1,10 +1,15 @@
 package com.example.library_system.domain.reader;
 
+import java.util.List;
+
+import com.example.library_system.domain.loan.Loan;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -30,6 +35,9 @@ public class Reader {
     private String email;
 
     private String cel;
+
+    @OneToMany(mappedBy="reader")
+    private List<Loan> loan;
 
     public String getFirstname() {
         return this.firstname;
@@ -69,6 +77,14 @@ public class Reader {
 
     public void setCel(String cel) {
         this.cel = cel;
+    }
+
+    public List<Loan> getLoan() {
+        return this.loan;
+    }
+
+    public void setLoan(List<Loan> loan) {
+        this.loan = loan;
     }
 
     public Reader(RequestReader requestReader) {
