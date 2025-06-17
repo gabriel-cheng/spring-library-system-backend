@@ -34,7 +34,7 @@ public class Book {
 
     private double value;
 
-    @Column(name="relase_date")
+    @Column(name="release_date")
     private Date releaseDate;
 
     private String nacionality;
