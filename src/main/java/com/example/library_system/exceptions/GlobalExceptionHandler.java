@@ -20,4 +20,10 @@ public class GlobalExceptionHandler {
             .body(ex.getMessage());
     }
 
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<String> handleAlreadyExists(AlreadyExistsException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ex.getMessage());
+    }
+
 }
