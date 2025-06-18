@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.library_system.domain.author.Author;
 import com.example.library_system.domain.author.AuthorRepository;
 import com.example.library_system.domain.author.RequestAuthor;
+import com.example.library_system.exceptions.ResourceCannotBeEmptyException;
 import com.example.library_system.exceptions.ResourceNotFoundException;
 
 @RestController
@@ -47,8 +48,26 @@ public class AuthorController {
     }
 
     @PostMapping
-    public ResponseEntity<String> registerNewAuthor(@RequestBody @Validated RequestAuthor author) {
+    public ResponseEntity<String> registerNewAuthor(
+        @RequestBody @Validated RequestAuthor author
+    ) throws ResourceCannotBeEmptyException {
         Author newAuthor = new Author(author);
+
+        if(author.firstname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The name can't be empty!");
+        }
+        if(author.surname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The surname can't be empty!");
+        }
+        if(author.dateOfBirth() == null) {
+            throw new ResourceCannotBeEmptyException("The date of birth can't be empty!");
+        }
+        if(author.biography().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The biography can't be empty!");
+        }
+        if(author.nacionality().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The nacionality can't be empty!");
+        }
 
         authorRepository.save(newAuthor);
 
@@ -60,9 +79,25 @@ public class AuthorController {
     public ResponseEntity<String> updateAuthor(
         @RequestBody @Validated RequestAuthor author,
         @PathVariable String id
-    ) throws ResourceNotFoundException {
+    ) throws ResourceNotFoundException, ResourceCannotBeEmptyException {
         Author authorFound = authorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Author " + id + " not found!"));
+
+        if(author.firstname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The name can't be empty!");
+        }
+        if(author.surname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The surname can't be empty!");
+        }
+        if(author.dateOfBirth() == null) {
+            throw new ResourceCannotBeEmptyException("The date of birth can't be empty!");
+        }
+        if(author.biography().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The biography can't be empty!");
+        }
+        if(author.nacionality().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The nacionality can't be empty!");
+        }
 
         authorFound.setFirstname(author.firstname());
         authorFound.setSurname(author.surname());
