@@ -53,21 +53,7 @@ public class AuthorController {
     ) throws ResourceCannotBeEmptyException {
         Author newAuthor = new Author(author);
 
-        if(author.firstname().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The name can't be empty!");
-        }
-        if(author.surname().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The surname can't be empty!");
-        }
-        if(author.dateOfBirth() == null) {
-            throw new ResourceCannotBeEmptyException("The date of birth can't be empty!");
-        }
-        if(author.biography().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The biography can't be empty!");
-        }
-        if(author.nacionality().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The nacionality can't be empty!");
-        }
+        authorDataValidator(author);
 
         authorRepository.save(newAuthor);
 
@@ -83,21 +69,7 @@ public class AuthorController {
         Author authorFound = authorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Author " + id + " not found!"));
 
-        if(author.firstname().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The name can't be empty!");
-        }
-        if(author.surname().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The surname can't be empty!");
-        }
-        if(author.dateOfBirth() == null) {
-            throw new ResourceCannotBeEmptyException("The date of birth can't be empty!");
-        }
-        if(author.biography().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The biography can't be empty!");
-        }
-        if(author.nacionality().isEmpty()) {
-            throw new ResourceCannotBeEmptyException("The nacionality can't be empty!");
-        }
+        authorDataValidator(author);
 
         authorFound.setFirstname(author.firstname());
         authorFound.setSurname(author.surname());
@@ -122,6 +94,24 @@ public class AuthorController {
 
         return ResponseEntity.status(HttpStatus.OK)
             .body("Author deleted successfully!");
+    }
+
+    private void authorDataValidator(RequestAuthor author) throws ResourceCannotBeEmptyException {
+        if(author.firstname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The name can't be empty!");
+        }
+        if(author.surname().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The surname can't be empty!");
+        }
+        if(author.dateOfBirth() == null) {
+            throw new ResourceCannotBeEmptyException("The date of birth can't be empty!");
+        }
+        if(author.biography().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The biography can't be empty!");
+        }
+        if(author.nacionality().isEmpty()) {
+            throw new ResourceCannotBeEmptyException("The nacionality can't be empty!");
+        }
     }
 
 }
