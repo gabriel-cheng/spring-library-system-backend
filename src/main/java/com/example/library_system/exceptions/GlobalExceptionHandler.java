@@ -26,4 +26,10 @@ public class GlobalExceptionHandler {
             .body(ex.getMessage());
     }
 
+    @ExceptionHandler(ResourceCannotBeEmptyException.class)
+    public ResponseEntity<String> handleResourceCannotBeEmpty(ResourceCannotBeEmptyException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(ex.getMessage());
+    }
+
 }
